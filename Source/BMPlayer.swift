@@ -79,7 +79,7 @@ open class BMPlayer: UIView {
     
     fileprivate var customControlView: BMPlayerControlView?
     
-    fileprivate var isFullScreen:Bool = false
+    public var isFullScreen:Bool = false
     
     /// 滑动方向
     fileprivate var panDirection = BMPanDirection.horizontal
