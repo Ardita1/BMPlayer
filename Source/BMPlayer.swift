@@ -79,11 +79,7 @@ open class BMPlayer: UIView {
     
     fileprivate var customControlView: BMPlayerControlView?
     
-    fileprivate var isFullScreen:Bool {
-        get {
-            return UIApplication.shared.statusBarOrientation.isLandscape
-        }
-    }
+    fileprivate var isFullScreen:Bool = false
     
     /// 滑动方向
     fileprivate var panDirection = BMPanDirection.horizontal
@@ -337,16 +333,17 @@ open class BMPlayer: UIView {
     }
     
     @objc fileprivate func fullScreenButtonPressed() {
-        controlView.updateUI(!self.isFullScreen)
-        if isFullScreen {
-            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-            UIApplication.shared.setStatusBarHidden(false, with: .fade)
-            UIApplication.shared.statusBarOrientation = .portrait
-        } else {
-            UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
-            UIApplication.shared.setStatusBarHidden(false, with: .fade)
-            UIApplication.shared.statusBarOrientation = .landscapeRight
-        }
+        delegate?.bmPlayer(player: self, playerOrientChanged: isFullScreen)
+//        controlView.updateUI(!self.isFullScreen)
+//        if isFullScreen {
+//            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+//            UIApplication.shared.setStatusBarHidden(false, with: .fade)
+//            UIApplication.shared.statusBarOrientation = .portrait
+//        } else {
+//            UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
+//            UIApplication.shared.setStatusBarHidden(false, with: .fade)
+//            UIApplication.shared.statusBarOrientation = .landscapeRight
+//        }
     }
     
     // MARK: - 生命周期
